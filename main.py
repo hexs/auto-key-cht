@@ -1,17 +1,6 @@
 from datetime import datetime, timedelta
-from Work_load_Input import i_meeting, i_coding_auto_inspection
-
-BLACK = '\033[90m'
-RED = '\033[91m'
-GREEN = '\033[92m'
-YELLOW = '\033[93m'
-BLUE = '\033[94m'
-PINK = '\033[95m'
-CYAN = '\033[96m'
-ENDC = '\033[0m'
-BOLD = '\033[1m'
-ITALICIZED = '\033[3m'
-UNDERLINE = '\033[4m'
+from Work_load import WorkLoad
+from constant import *
 
 year = 2024
 holiday_note = {
@@ -36,8 +25,9 @@ for day in holiday:
     else:
         print(day.date(), day.strftime('%A'))
 
-start_date = datetime(2024, 5, 1)
-stop_date = datetime(2024, 5, 23)
+work_load = WorkLoad(year, holiday, "C026730")
+start_date = datetime(year, 5, 24)
+stop_date = datetime(year, 5, 25)
 date_focus = start_date
 n_day = 0
 while True:
@@ -50,8 +40,20 @@ while True:
         continue
 
     JobDate = date_focus.strftime('%d-%b-%y')
-    i_meeting(JobDate)
-    i_coding_auto_inspection(JobDate)
+
+    work_load.read_work_load(JobDate)
+    work_load.show_work_load_time_use(JobDate)
+    work_load.show_work_load_table(JobDate)
+    print()
+
+    if False:  # key work load
+        work_load.i_meeting(JobDate)
+        work_load.i_coding_auto_inspection(JobDate)
+
+        work_load.read_work_load(JobDate)
+        work_load.show_work_load_time_use(JobDate)
+        work_load.show_work_load_table(JobDate)
+        print()
 
     date_focus += timedelta(days=1)
     n_day += 1

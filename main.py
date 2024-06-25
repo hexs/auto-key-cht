@@ -26,8 +26,8 @@ for day in holiday:
         print(day.date(), day.strftime('%A'))
 
 work_load = WorkLoad(year, holiday, "C026730")
-start_date = datetime(year, 5, 24)
-stop_date = datetime(year, 5, 25)
+start_date = datetime(year, 5, 22)
+stop_date = datetime(year, 6, 25)
 date_focus = start_date
 n_day = 0
 while True:
